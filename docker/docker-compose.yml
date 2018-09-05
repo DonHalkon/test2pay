@@ -1,0 +1,19 @@
+version: '3.1'
+services:
+  wildfly:
+    build: .
+    restart: always
+    ports:
+    - "8080:8080"
+    - "9990:9990"
+    depends_on:
+      - postgres
+  postgres:
+    image: postgres:9.6.10-alpine
+    restart: always
+    ports:
+      - 5432:5432 # to run for local server tests
+    environment:
+      POSTGRES_DB: initdb
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: example
